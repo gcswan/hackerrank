@@ -4,20 +4,19 @@ function balancedBrackets(str) {
         ']': '[',
         ')': '('
     }
+    
     if (str.length % 2 ===  1) return 'NO'
     const stack = []
     const isOpener = (ch) => ch === '(' || ch === '[' || ch === '{'
 
     for (let i = 0; i < str.length; i++) {
         if (isOpener(str[i])) {
-            stack.push(str[i])
+          stack.push(str[i])
         } else {
-            if (!stack || str[i] !== ')' || str[i] !== ']' || str[i] !== '}') return 'NO'
-            const opener = stack.pop();
-            if (match[str[i]] !== opener) return 'NO'
+          if (match[str[i]] !== stack.pop()) return 'NO'
         }
     }
-    return 'YES'
+    return stack.length === 0 ? 'YES' : 'NO'
 }
 
 console.log(balancedBrackets('{{[[(())]]}}'))
